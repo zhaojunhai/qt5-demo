@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>MainForm.ui.qml</file>
+        <file>ClickableImage.qml</file>
+        <file>TranstionItem.qml</file>
+        <file>assets/background.png</file>
+        <file>assets/ufo.png</file>
+    </qresource>
+</RCC>
