@@ -2,9 +2,7 @@ import QtQuick 2.0
 
     Rectangle {
         id:demo
-        Text {
-            text: text
-        }
+
         border.width: 3
         border.color: "black"
 
@@ -14,40 +12,25 @@ import QtQuick 2.0
         property int normalWidth: 500
         property int normalHeight: 390
 
-        property int mainWidth: 900
-        property int mainHeight: 500
+        property int mainWidth: 1010
+        property int mainHeight: 550
 
-        property int miniWidth: 300
+        property int miniWidth: 336
         property int miniHeight: 200
+
+        property int miniY: 550
 
         Text {
             text: "This is a Demo:"+position
+            anchors.centerIn: parent
             font {
                 pointSize: 30
                 bold:true
             }
         }
 
-        Component.onCompleted: {
-            console.info("demo x="+x+"\ty="+y+"\twidth="+width+"\theight="+height)
-            console.info("normal height="+normalHeight+"\tnormalWidth="+normalWidth)
-        }
-        MouseArea {
-            anchors.fill: parent
-            onClicked: {
-                if(demo.state=="normalLayout")
-                    demo.state="mainLayout"
-                else if(demo.state=="mainLayout")
-                    demo.state="miniLayout"
-                else if(demo.state=="miniLayout")
-                    demo.state="normalLayout"
-            }
-        }
-
         function pressed(event) {
             var key = event.key
-            console.info("This is a key:"+key)
-            console.info("This is a O:"+Qt.Key_O)
             if(key==Qt.Key_0){
                 switch(position){
                 case 0:state="mainLayout";break
@@ -103,8 +86,8 @@ import QtQuick 2.0
                 name:"mainLayout"
                 PropertyChanges {
                     target:demo
-                    x:50
-                    y:20
+                    x:0
+                    y:0
                     width: mainWidth
                     height: mainHeight
                     color:"red"
@@ -115,7 +98,7 @@ import QtQuick 2.0
                 PropertyChanges {
                     target:demo
                     x:0
-                    y:600
+                    y:miniY
                     width: miniWidth
                     height: miniHeight
                     color:"blue"
@@ -125,8 +108,8 @@ import QtQuick 2.0
                 name:"miniLayout1"
                 PropertyChanges {
                     target:demo
-                    x:340
-                    y:600
+                    x:337
+                    y:miniY
                     width: miniWidth
                     height: miniHeight
                     color:"blue"
@@ -136,8 +119,8 @@ import QtQuick 2.0
                 name:"miniLayout2"
                 PropertyChanges {
                     target:demo
-                    x:680
-                    y:600
+                    x:674
+                    y:miniY
                     width: miniWidth
                     height: miniHeight
                     color:"blue"
