@@ -3,5 +3,8 @@
         <file>main.qml</file>
         <file>QualItem.qml</file>
         <file>SensorItem.qml</file>
+        <file>SensorTitle.qml</file>
+        <file>qtquickcontrols2.conf</file>
+        <file>ShowItem.qml</file>
     </qresource>
 </RCC>

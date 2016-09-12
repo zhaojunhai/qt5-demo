@@ -18,37 +18,19 @@ ApplicationWindow {
         Rectangle {
             Layout.preferredWidth: 1000
             Layout.preferredHeight: 780
-            GridLayout {
-                columns: 2
-                rows:2
-                Rectangle {
-                    Layout.preferredWidth: layout.qualWidth
-                    Layout.preferredHeight: layout.qualHeigth
-                    Text {
-                        text: "This a text"
-                    }
-                }
-                Rectangle {
-                    Layout.preferredWidth: layout.qualWidth
-                    Layout.preferredHeight: layout.qualHeigth
-                    Text {
-                        text: "This a text"
-                    }
-                }
-                Rectangle {
-                    Layout.preferredWidth: layout.qualWidth
-                    Layout.preferredHeight: layout.qualHeigth
-                    Text {
-                        text: "This a text"
-                    }
-                }
-                Rectangle {
-                    Layout.preferredWidth: layout.qualWidth
-                    Layout.preferredHeight: layout.qualHeigth
-                    Text {
-                        text: "This a text"
-                    }
-                }
+
+            ShowItem{ id: showItem1;position: 0 }
+            ShowItem{ id: showItem2;position: 1 }
+            ShowItem{ id: showItem3;position: 2 }
+            ShowItem{ id: showItem4;position: 3 }
+
+            Keys.enabled: true
+            focus:true
+            Keys.onPressed: {
+                showItem1.pressed(event)
+                showItem2.pressed(event)
+                showItem3.pressed(event)
+                showItem4.pressed(event)
             }
         }
         Rectangle {
@@ -79,26 +61,31 @@ ApplicationWindow {
                 ListElement { name:"甲烷浓度";unit:"%"}
             }
 
+            ListModel {
+                id:envParam
+                ListElement { name:"电池电量";unit:"%"}
+                ListElement { name:"车厢温度";unit:"摄氏度"}
+                ListElement { name:"行驶速度";unit:"km/h"}
+            }
+
             Layout.preferredWidth: 270
             Layout.preferredHeight: 780
             ColumnLayout {
                 width: 270
                 height: 270
 
-                Label {
-                    id: title
+                Rectangle {
+                    width:parent.width
+                    height: 25
+                    opacity: 0.0
+                }
+
+                SensorTitle {
                     text:qsTr("环境指标")
-                    horizontalAlignment: Text.AlignHCenter
 
                     Layout.preferredWidth: parent.width
-                    Layout.preferredHeight: 35
+                    Layout.preferredHeight: 45
                     Layout.alignment: Qt.AlignTop
-
-                    font {
-                        pointSize: 30
-                        bold:true
-                    }
-                    color: "white"
                 }
 
                 Repeater {
@@ -110,51 +97,30 @@ ApplicationWindow {
                         text: name+":"
                         value:"25" + " " +unit
                     }
-
                 }
 
-                Label {
-                    id: dev_title
-                    text:qsTr("设备运行指标")
-                    horizontalAlignment: Text.AlignHCenter
+                Rectangle {
+                    width:parent.width
+                    height: 30
+                    opacity: 0.0
+                }
 
+                SensorTitle {
+                    text:qsTr("运行指标")
                     Layout.preferredWidth: parent.width
-                    Layout.preferredHeight: 35
+                    Layout.preferredHeight: 45
                     Layout.alignment: Qt.AlignTop
+                }
 
-                    MouseArea {
-                        anchors.fill: parent
-                        onClicked: {
-                            console.info("Width:"+width+"\t"+"Heigth:"+height)
-                        }
+                Repeater {
+                    model: envParam
+                    SensorItem {
+                        Layout.preferredWidth: sensorArea.width
+                        Layout.alignment: Qt.AlignTop
+                        Layout.preferredHeight: 25
+                        text: name+":"
+                        value:"25" + " " +unit
                     }
-
-                    font {
-                        pointSize: 30
-                        bold:true
-                    }
-                    color: "white"
-                }
-
-                SensorItem {
-                    Layout.preferredWidth: sensorArea.width
-                    Layout.alignment: Qt.AlignTop
-                    Layout.preferredHeight: 25
-                    text: qsTr("车厢温度:")
-                    value:"25%"
-                }
-                SensorItem {
-                    Layout.preferredWidth: sensorArea.width
-                    Layout.alignment: Qt.AlignTop
-                    Layout.preferredHeight: 25
-                    text: qsTr("行驶速度:")
-                    value:"90m/s"
-                }
-                SensorItem {
-                    Layout.preferredWidth: sensorArea.width
-                    Layout.preferredHeight: 25
-                    text: qsTr("电池电量:")
-                    value:"91%"
                 }
             }
         }
