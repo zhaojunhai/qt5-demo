@@ -1,10 +1,11 @@
 import QtQuick 2.0
+import QtMultimedia 5.5
 
     Rectangle {
-        id:demo
+        id:displayArea
 
-        border.width: 3
-        border.color: "black"
+//        border.width: 3
+//        border.color: "black"
 
         //位置 0-3
         property int position: 1
@@ -20,13 +21,25 @@ import QtQuick 2.0
 
         property int miniY: 550
 
+        VideoOutput {
+                  anchors.fill: parent
+                  source: camera
+//                  source:"rtsp://218.204.223.237:554/live/1/66251FC11353191F/e7ooqwcfbqjoo80j.sdp"
+                  fillMode: VideoOutput.Stretch
+        }
+
+        Camera {
+                  id: camera
+        }
+
         Text {
-            text: "This is a Demo:"+position
+            text: "This is a displayArea:"+position
             anchors.centerIn: parent
             font {
                 pointSize: 30
                 bold:true
             }
+            color:"white"
         }
 
         function pressed(event) {
@@ -72,9 +85,9 @@ import QtQuick 2.0
         states:[
             State {
                 name:"normalLayout"
-                when:demo.visible
+                when:displayArea.visible
                 PropertyChanges {
-                    target:demo
+                    target:displayArea
                     x:if(position == 0 || position == 1) 0;else 505
                     y:if(position == 1 || position == 3) 395;else 0
                     width: normalWidth
@@ -85,7 +98,7 @@ import QtQuick 2.0
             State {
                 name:"mainLayout"
                 PropertyChanges {
-                    target:demo
+                    target:displayArea
                     x:0
                     y:0
                     width: mainWidth
@@ -96,7 +109,7 @@ import QtQuick 2.0
             State {
                 name:"miniLayout0"
                 PropertyChanges {
-                    target:demo
+                    target:displayArea
                     x:0
                     y:miniY
                     width: miniWidth
@@ -107,7 +120,7 @@ import QtQuick 2.0
             State {
                 name:"miniLayout1"
                 PropertyChanges {
-                    target:demo
+                    target:displayArea
                     x:337
                     y:miniY
                     width: miniWidth
@@ -118,12 +131,354 @@ import QtQuick 2.0
             State {
                 name:"miniLayout2"
                 PropertyChanges {
-                    target:demo
+                    target:displayArea
                     x:674
                     y:miniY
                     width: miniWidth
                     height: miniHeight
                     color:"blue"
+                }
+            }
+        ]
+        transitions: [
+            Transition {
+                from: "mainLayout"
+                to: "normalLayout"
+
+                NumberAnimation {
+                    target:displayArea
+                    property: "x"
+                    duration: 200
+                    easing.type: Easing.InOutQuad
+                }
+                NumberAnimation {
+                    target: displayArea
+                    property: "y"
+                    duration: 200
+                    easing.type: Easing.InOutQuad
+                }
+            },
+            Transition {
+                from: "mainLayout"
+                to: "miniLayout0"
+
+                NumberAnimation {
+                    target:displayArea
+                    property: "x"
+                    duration: 200
+                    easing.type: Easing.InOutQuad
+                }
+                NumberAnimation {
+                    target: displayArea
+                    property: "y"
+                    duration: 200
+                    easing.type: Easing.InOutQuad
+                }
+            },
+            Transition {
+                from: "mainLayout"
+                to: "miniLayout1"
+
+                NumberAnimation {
+                    target:displayArea
+                    property: "x"
+                    duration: 200
+                    easing.type: Easing.InOutQuad
+                }
+                NumberAnimation {
+                    target: displayArea
+                    property: "y"
+                    duration: 200
+                    easing.type: Easing.InOutQuad
+                }
+            },
+            Transition {
+                from: "mainLayout"
+                to: "miniLayout2"
+
+                NumberAnimation {
+                    target:displayArea
+                    property: "x"
+                    duration: 200
+                    easing.type: Easing.InOutQuad
+                }
+                NumberAnimation {
+                    target: displayArea
+                    property: "y"
+                    duration: 200
+                    easing.type: Easing.InOutQuad
+                }
+            },
+            Transition {
+                from: "normalLayout"
+                to: "mainLayout"
+
+                NumberAnimation {
+                    target:displayArea
+                    property: "x"
+                    duration: 200
+                    easing.type: Easing.InOutQuad
+                }
+                NumberAnimation {
+                    target: displayArea
+                    property: "y"
+                    duration: 200
+                    easing.type: Easing.InOutQuad
+                }
+            },
+            Transition {
+                from: "normalLayout"
+                to: "miniLayout0"
+
+                NumberAnimation {
+                    target:displayArea
+                    property: "x"
+                    duration: 200
+                    easing.type: Easing.InOutQuad
+                }
+                NumberAnimation {
+                    target: displayArea
+                    property: "y"
+                    duration: 200
+                    easing.type: Easing.InOutQuad
+                }
+            },
+            Transition {
+                from: "normalLayout"
+                to: "miniLayout1"
+
+                NumberAnimation {
+                    target:displayArea
+                    property: "x"
+                    duration: 200
+                    easing.type: Easing.InOutQuad
+                }
+                NumberAnimation {
+                    target: displayArea
+                    property: "y"
+                    duration: 200
+                    easing.type: Easing.InOutQuad
+                }
+            },
+            Transition {
+                from: "normalLayout"
+                to: "miniLayout2"
+
+                NumberAnimation {
+                    target:displayArea
+                    property: "x"
+                    duration: 200
+                    easing.type: Easing.InOutQuad
+                }
+                NumberAnimation {
+                    target: displayArea
+                    property: "y"
+                    duration: 200
+                    easing.type: Easing.InOutQuad
+                }
+            },
+            Transition {
+                from: "miniLayout0"
+                to: "mainLayout"
+
+                NumberAnimation {
+                    target:displayArea
+                    property: "x"
+                    duration: 200
+                    easing.type: Easing.InOutQuad
+                }
+                NumberAnimation {
+                    target: displayArea
+                    property: "y"
+                    duration: 200
+                    easing.type: Easing.InOutQuad
+                }
+            },
+            Transition {
+                from: "miniLayout0"
+                to: "normalLayout"
+
+                NumberAnimation {
+                    target:displayArea
+                    property: "x"
+                    duration: 200
+                    easing.type: Easing.InOutQuad
+                }
+                NumberAnimation {
+                    target: displayArea
+                    property: "y"
+                    duration: 200
+                    easing.type: Easing.InOutQuad
+                }
+            },
+            Transition {
+                from: "miniLayout0"
+                to: "miniLayout1"
+
+                NumberAnimation {
+                    target:displayArea
+                    property: "x"
+                    duration: 200
+                    easing.type: Easing.InOutQuad
+                }
+                NumberAnimation {
+                    target: displayArea
+                    property: "y"
+                    duration: 200
+                    easing.type: Easing.InOutQuad
+                }
+            },
+            Transition {
+                from: "miniLayout0"
+                to: "miniLayout2"
+
+                NumberAnimation {
+                    target:displayArea
+                    property: "x"
+                    duration: 200
+                    easing.type: Easing.InOutQuad
+                }
+                NumberAnimation {
+                    target: displayArea
+                    property: "y"
+                    duration: 200
+                    easing.type: Easing.InOutQuad
+                }
+            },
+            Transition {
+                from: "miniLayout1"
+                to: "mainLayout"
+
+                NumberAnimation {
+                    target:displayArea
+                    property: "x"
+                    duration: 200
+                    easing.type: Easing.InOutQuad
+                }
+                NumberAnimation {
+                    target: displayArea
+                    property: "y"
+                    duration: 200
+                    easing.type: Easing.InOutQuad
+                }
+            },
+            Transition {
+                from: "miniLayout1"
+                to: "normalLayout"
+
+                NumberAnimation {
+                    target:displayArea
+                    property: "x"
+                    duration: 200
+                    easing.type: Easing.InOutQuad
+                }
+                NumberAnimation {
+                    target: displayArea
+                    property: "y"
+                    duration: 200
+                    easing.type: Easing.InOutQuad
+                }
+            },
+            Transition {
+                from: "miniLayout1"
+                to: "miniLayout0"
+
+                NumberAnimation {
+                    target:displayArea
+                    property: "x"
+                    duration: 200
+                    easing.type: Easing.InOutQuad
+                }
+                NumberAnimation {
+                    target: displayArea
+                    property: "y"
+                    duration: 200
+                    easing.type: Easing.InOutQuad
+                }
+            },
+            Transition {
+                from: "miniLayout1"
+                to: "miniLayout2"
+
+                NumberAnimation {
+                    target:displayArea
+                    property: "x"
+                    duration: 200
+                    easing.type: Easing.InOutQuad
+                }
+                NumberAnimation {
+                    target: displayArea
+                    property: "y"
+                    duration: 200
+                    easing.type: Easing.InOutQuad
+                }
+            },
+            Transition {
+                from: "miniLayout2"
+                to: "mainLayout"
+
+                NumberAnimation {
+                    target:displayArea
+                    property: "x"
+                    duration: 200
+                    easing.type: Easing.InOutQuad
+                }
+                NumberAnimation {
+                    target: displayArea
+                    property: "y"
+                    duration: 200
+                    easing.type: Easing.InOutQuad
+                }
+            },
+            Transition {
+                from: "miniLayout2"
+                to: "normalLayout"
+
+                NumberAnimation {
+                    target:displayArea
+                    property: "x"
+                    duration: 200
+                    easing.type: Easing.InOutQuad
+                }
+                NumberAnimation {
+                    target: displayArea
+                    property: "y"
+                    duration: 200
+                    easing.type: Easing.InOutQuad
+                }
+            },
+            Transition {
+                from: "miniLayout2"
+                to: "miniLayout0"
+
+                NumberAnimation {
+                    target:displayArea
+                    property: "x"
+                    duration: 200
+                    easing.type: Easing.InOutQuad
+                }
+                NumberAnimation {
+                    target: displayArea
+                    property: "y"
+                    duration: 200
+                    easing.type: Easing.InOutQuad
+                }
+            },
+            Transition {
+                from: "miniLayout2"
+                to: "miniLayout1"
+
+                NumberAnimation {
+                    target:displayArea
+                    property: "x"
+                    duration: 200
+                    easing.type: Easing.InOutQuad
+                }
+                NumberAnimation {
+                    target: displayArea
+                    property: "y"
+                    duration: 200
+                    easing.type: Easing.InOutQuad
                 }
             }
         ]

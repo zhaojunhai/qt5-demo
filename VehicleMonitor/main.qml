@@ -16,6 +16,8 @@ ApplicationWindow {
         property int qualHeigth: 390
         spacing: 10
         Rectangle {
+            color:"black"
+
             Layout.preferredWidth: 1000
             Layout.preferredHeight: 780
 
